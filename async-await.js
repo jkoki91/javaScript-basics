@@ -47,34 +47,35 @@ const getSalario = ( id ) => {
     });
 };
 
-const id = 8;
+const id = 11;
 
-// getEmpleado( id )
-//     .then(empleado => console.log(empleado))
-//     .catch( err => console.log(err) );
+const getInfoUsuario = async ( id ) => {
 
-// getSalario( id )
-//     .then(salario => console.log(salario))
-//     .catch( err => console.log(err) );
+    try {
+        const empleado = await getEmpleado( id )
+        const salario = await getSalario( id )
+        return `El salario del empleado ${empleado} es de ${salario}`;
+    } catch (error) {
+        // return error // return es por si sale bien, dispararia el .then no el catch
+        throw error
+    }
 
+};
 
-// Esto es una mala forma
-// getEmpleado( id )
-//     .then( empleado => {
-        
-//         getSalario( id )
-//             .then( salario => console.log('El empleado:', empleado, 'tiene una salario:', salario) )
-//             .catch( err => console.log(err) )
-
-//     })
-//     .catch( err => console.log(err) )
-
-let nombre;
-
-getEmpleado( id )
-    .then( empleado => {
-        nombre = empleado
-        return getSalario(id)
+getInfoUsuario( id )
+    .then( msg => {
+        console.log('Todo bien!!');
+        console.log(msg);
     } )
-    .then( salario => console.log('El empleado:', nombre, 'tiene un salario de:',salario))
-    .catch( err => console.log(err)) 
+    .catch( error =>{
+        console.log('Todo mal!!');
+        console.log(error);
+    })
+
+
+
+
+
+
+
+
